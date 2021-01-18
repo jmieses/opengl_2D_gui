@@ -265,7 +265,7 @@ int main()
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Application", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -318,6 +318,8 @@ int main()
     ImGui_ImplOpenGL3_Init(glsl_version);
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
+    //ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImVec4 clear_color = ImVec4(.16f, .14f, .25f, 1.00f);
 
     // render loop
     // -----------
@@ -332,7 +334,7 @@ int main()
         ImGui::NewFrame();
 
         processInput(window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         glPointSize(2);
         Dynamic_Draw(curve.NURBS(vertices), dynamic_vertex_array_2, dynamic_vertex_buffer_2, shader_2);
@@ -342,16 +344,18 @@ int main()
 
         auto& wts = curve.Get_Weights();
         // render your GUI
-        ImGui::Begin("Demo window");
-        ImGui::Button("Hello!");
-    
-        for(int i = 0; i < wts.size(); i++){
-            std::string label = "weight " + std::to_string(i);
-            ImGui::DragFloat(&label.front(), &wts[i], 0.05f, 0.0f, 100.0f);
+        ImGui::Begin("Application Controls");
+        if (ImGui::CollapsingHeader("Background Color")){
+            ImGui::ColorEdit3("clear color", (float*)&clear_color);
         }
 
-    
-        
+        if (ImGui::CollapsingHeader("Control Point Weights")){
+            for(int i = 0; i < wts.size(); i++){
+                std::string label = "weight " + std::to_string(i);
+                ImGui::DragFloat(&label.front(), &wts[i], 0.05f, 0.0f, 100.0f);
+            }
+        }
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
         // Render dear imgui into screen
         ImGui::Render();

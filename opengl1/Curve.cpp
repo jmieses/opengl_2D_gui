@@ -145,14 +145,6 @@ const std::vector<float>& Curve::NURBS(std::vector<float>& ctrl_pts){
 	// }
 }
 
-// inline void Curve::Scale_Points(std::vector<Point>* ctrl_pts, std::vector<float>& weight){
-
-// 	for(int i = 0; i < ctrl_pts.size(); i++){
-// 		ctrl_pts[i]->x = weight[i] * ctrl_pts[i]->x;
-// 		ctrl_pts[i]->y = weight[i] * ctrl_pts[i]->y;
-// 	}
-// }
-
 inline void Curve::Scale_Points(){
 
 	for(int i = 0; i < m_ctrl_pts.size(); i++){
