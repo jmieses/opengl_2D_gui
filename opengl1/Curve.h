@@ -14,6 +14,8 @@ public:
 	const std::vector<float>& deCasteljau(std::vector<float>& ctrl_pts);
 	const std::vector<float>& Bspline(std::vector<float>& ctrl_pts);
 	const std::vector<float>& NURBS(std::vector<float>& ctrl_pts);
+	void NURBS_Init();
+	inline std::vector<float>& Get_Weights() { return m_weight_vector; }
 private:
 	void deCasteljau_Subroutine(float u);
 	void Vector_To_Points(std::vector<float>& ctrl_pts);

@@ -32,10 +32,10 @@ const std::vector<float>& Curve::Bspline(std::vector<float>& ctrl_pts){
 	if(!m_curve.empty()) m_curve.clear();
 	if(m_knot_vector.empty()) Gen_Knot_Vector();
 
-	for(float u = 0.0f; u <= 1.0f; u += m_res){
+	for(float u = 0.f; u <= 1.f; u += m_res){
 		int span = this->Find_Span(u);
 		Basis_Funcs(span, u);
-		float x = 0.0f, y = 0.0f;
+		float x = 0.f, y = 0.f;
 		for(int i = 0; i < degree + 1; i++){
 			x = x + m_bspline_basis_funcs[i] * m_ctrl_pts[span - degree + i].x;
 			y = y + m_bspline_basis_funcs[i] * m_ctrl_pts[span - degree + i].y;
@@ -60,7 +60,7 @@ void Curve::Gen_Knot_Vector(){
 		m_knot_vector.emplace_back((float)i / (float)(n - degree + 1));
 	}
 
-	for (int i = 0; i < degree + 1; ++i)   { m_knot_vector.emplace_back(1.); }
+	for (int i = 0; i < degree + 1; ++i)   { m_knot_vector.emplace_back(1.f); }
 }
 
 int Curve::Find_Span(float& u){
@@ -112,14 +112,28 @@ void Curve::Vector_To_Points(std::vector<float>& vertices){
 	}
 }
 
+void Curve::NURBS_Init(){
+
+}
+
 const std::vector<float>& Curve::NURBS(std::vector<float>& ctrl_pts){
 	Vector_To_Points(ctrl_pts);
 
 	// create weights vector
-	if(!m_weight_vector.empty()) m_weight_vector.clear();
+	// if(!m_weight_vector.empty()) m_weight_vector.clear();
 
-	for(int i = 0; i < m_ctrl_pts.size(); i++) m_weight_vector.emplace_back(10.0f);
+	// for(int i = 0; i < m_ctrl_pts.size(); i++) m_weight_vector.emplace_back(10.0f);
 
+	// Check that weight vector contains same number of weights as number of control points
+	if(m_weight_vector.size() < m_ctrl_pts.size()){
+
+		for(auto i = m_weight_vector.size(); i < m_ctrl_pts.size(); i++) m_weight_vector.emplace_back(1.0f);
+	
+	}else if(m_weight_vector.size() > m_ctrl_pts.size()){
+
+		for(auto i = m_ctrl_pts.size(); i < m_weight_vector.size(); i++) m_weight_vector.pop_back();
+	}
+	
 	Scale_Points();
 
 	return NURBS_Subroutine();
