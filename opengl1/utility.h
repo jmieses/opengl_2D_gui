@@ -28,6 +28,9 @@ const unsigned int VERTICES_SIZE = 12;                          /*Size of vertic
 
 unsigned int VBO, VAO, EBO;
 
+bool global_update_control_points = true;
+bool global_add_control_point = false;
+
 std::vector<float> vertices {
         -0.9f, -0.5f, 0.0f,  
         -0.0f, -0.5f, 0.0f,  
@@ -70,8 +73,8 @@ void Draw(int shaderProgram, VertexArray& va, VertexBuffer& vb) {
     // render
     // ------
     
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    //glClear(GL_COLOR_BUFFER_BIT);
 
     // draw our first triangle
     glUseProgram(shaderProgram);
@@ -97,7 +100,10 @@ void Dynamic_Draw(const std::vector<float>& points, const VertexArray& va, const
 
     glDrawArrays(GL_POINTS, 0, points.size() / 3);
 
-    Update_Vertices();
+    if(global_update_control_points){
+        Update_Vertices();
+    }
+    
 }
 
 void Normal_Distribution(float * sample) {

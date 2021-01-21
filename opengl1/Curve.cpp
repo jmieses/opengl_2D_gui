@@ -112,9 +112,6 @@ void Curve::Vector_To_Points(std::vector<float>& vertices){
 	}
 }
 
-void Curve::NURBS_Init(){
-
-}
 
 const std::vector<float>& Curve::NURBS(std::vector<float>& ctrl_pts){
 	Vector_To_Points(ctrl_pts);
@@ -157,7 +154,11 @@ const std::vector<float>& Curve::NURBS_Subroutine(){
 	
 
 	if(!m_curve.empty()) m_curve.clear();
-	if(m_knot_vector.empty()) Gen_Knot_Vector();
+	
+	//if(m_knot_vector.empty()) Gen_Knot_Vector();
+	// Knot vector have to regenerated in case of an addition or substraction of a point.
+	// TODO - could add a flag to check if the knot vector should regenerated.
+	Gen_Knot_Vector();
 
 	for(float u = 0.0f; u <= 1.0f; u += m_res){
 		int span = this->Find_Span(u);
@@ -165,7 +166,7 @@ const std::vector<float>& Curve::NURBS_Subroutine(){
 
 		float basis_weight = 0.f;
 
-		for(unsigned int i =0; i < degree + 1; i++){
+		for(int i =0; i < degree + 1; i++){
 			basis_weight += m_bspline_basis_funcs[i] * m_weight_vector[span - degree + i];
 		}
 

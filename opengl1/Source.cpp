@@ -344,7 +344,22 @@ int main()
 
         auto& wts = curve.Get_Weights();
         // render your GUI
+        
+
         ImGui::Begin("Application Controls");
+        ImGui::Checkbox("Allow Random Control Points", &global_update_control_points);
+        if (ImGui::Button("Add Control Point")){
+            vertices.emplace_back(.5f);
+            vertices.emplace_back(.5f);
+            vertices.emplace_back(0.0f);
+        }
+
+        if (ImGui::Button("Remove Control Point")){
+            vertices.pop_back();
+            vertices.pop_back();
+            vertices.pop_back();
+        }
+
         if (ImGui::CollapsingHeader("Background Color")){
             ImGui::ColorEdit3("clear color", (float*)&clear_color);
         }
