@@ -21,7 +21,7 @@ private:
 	void Vector_To_Points(std::vector<float>& ctrl_pts);
 	std::vector<float> m_curve;
 	std::vector<Point> m_ctrl_pts;
-	float m_res = 0.001f;
+
 
 	void Gen_Knot_Vector();
 	int Find_Span(float&);

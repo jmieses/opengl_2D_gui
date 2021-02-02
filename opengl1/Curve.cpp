@@ -1,5 +1,8 @@
 #include "Curve.h"
 #include <numeric>
+
+static const float m_res = 0.001f;
+
 const std::vector<float>& Curve::deCasteljau(std::vector<float>& ctrl_pts){
 	Vector_To_Points(ctrl_pts);
 

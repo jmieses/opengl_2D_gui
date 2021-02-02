@@ -351,7 +351,7 @@ int main()
         if (ImGui::Button("Add Control Point")){
             vertices.emplace_back(.5f);
             vertices.emplace_back(.5f);
-            vertices.emplace_back(0.0f);
+                vertices.emplace_back(0.0f);
         }
 
         if (ImGui::Button("Remove Control Point")){
