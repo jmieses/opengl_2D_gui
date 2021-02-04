@@ -330,15 +330,11 @@ int main()
         ImGui::Begin("Application Controls");
         ImGui::Checkbox("Allow Random Control Points", &render.update_control_points);
         if (ImGui::Button("Add Control Point")){
-            vertices.emplace_back(.5f);
-            vertices.emplace_back(.5f);
-                vertices.emplace_back(0.0f);
+            render.Add_Control_Point();
         }
 
         if (ImGui::Button("Remove Control Point")){
-            vertices.pop_back();
-            vertices.pop_back();
-            vertices.pop_back();
+            render.Remove_Control_Point();
         }
 
         if (ImGui::CollapsingHeader("Background Color")){

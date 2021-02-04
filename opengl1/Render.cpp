@@ -16,31 +16,31 @@ static std::vector<float> lcl_control_points {
 
 Render::Render(){
 
-		show_decasteljau = false;
-		show_bspline = false;
-		show_nurbs = true;
-		update_control_points = true;
-		
-		this->m_rdr_obj_ctrl_pts.shader.Set_Shader("control_points.vs", "control_points.fs");
-		this->m_rdr_obj_ctrl_pts.layout.Push<float>(3);
-		this->m_rdr_obj_ctrl_pts.vertex_array.AddBuffer(this->m_rdr_obj_ctrl_pts.vertex_buffer, 
-														this->m_rdr_obj_ctrl_pts.layout);
-		glEnableVertexAttribArray(0);
-		this->m_rdr_obj_decasteljau.shader.Set_Shader("decasteljau.vs", "decasteljau.fs");
-		this->m_rdr_obj_decasteljau.layout.Push<float>(3);
-		this->m_rdr_obj_decasteljau.vertex_array.AddBuffer(this->m_rdr_obj_decasteljau.vertex_buffer, 
-														this->m_rdr_obj_decasteljau.layout);
-		glEnableVertexAttribArray(0);
-		this->m_rdr_obj_bspline.shader.Set_Shader("bspline.vs", "bspline.fs");
-		this->m_rdr_obj_bspline.layout.Push<float>(3);
-		this->m_rdr_obj_bspline.vertex_array.AddBuffer(this->m_rdr_obj_bspline.vertex_buffer, 
-														this->m_rdr_obj_bspline.layout);
-		glEnableVertexAttribArray(0);
-		this->m_rdr_obj_nurbs.shader.Set_Shader("nurbs.vs", "nurbs.fs");
-		this->m_rdr_obj_nurbs.layout.Push<float>(3);
-		this->m_rdr_obj_nurbs.vertex_array.AddBuffer(this->m_rdr_obj_nurbs.vertex_buffer, 
-														this->m_rdr_obj_nurbs.layout);
-		glEnableVertexAttribArray(0);
+	show_decasteljau = false;
+	show_bspline = false;
+	show_nurbs = true;
+	update_control_points = true;
+	
+	this->m_rdr_obj_ctrl_pts.shader.Set_Shader("control_points.vs", "control_points.fs");
+	this->m_rdr_obj_ctrl_pts.layout.Push<float>(3);
+	this->m_rdr_obj_ctrl_pts.vertex_array.AddBuffer(this->m_rdr_obj_ctrl_pts.vertex_buffer, 
+													this->m_rdr_obj_ctrl_pts.layout);
+	glEnableVertexAttribArray(0);
+	this->m_rdr_obj_decasteljau.shader.Set_Shader("decasteljau.vs", "decasteljau.fs");
+	this->m_rdr_obj_decasteljau.layout.Push<float>(3);
+	this->m_rdr_obj_decasteljau.vertex_array.AddBuffer(this->m_rdr_obj_decasteljau.vertex_buffer, 
+													this->m_rdr_obj_decasteljau.layout);
+	glEnableVertexAttribArray(0);
+	this->m_rdr_obj_bspline.shader.Set_Shader("bspline.vs", "bspline.fs");
+	this->m_rdr_obj_bspline.layout.Push<float>(3);
+	this->m_rdr_obj_bspline.vertex_array.AddBuffer(this->m_rdr_obj_bspline.vertex_buffer, 
+													this->m_rdr_obj_bspline.layout);
+	glEnableVertexAttribArray(0);
+	this->m_rdr_obj_nurbs.shader.Set_Shader("nurbs.vs", "nurbs.fs");
+	this->m_rdr_obj_nurbs.layout.Push<float>(3);
+	this->m_rdr_obj_nurbs.vertex_array.AddBuffer(this->m_rdr_obj_nurbs.vertex_buffer, 
+													this->m_rdr_obj_nurbs.layout);
+	glEnableVertexAttribArray(0);
 }
 
 void Render::Dynamic_Draw(){
@@ -101,4 +101,21 @@ void Render::Normal_Distribution(float * sample) {
 
     float x = normal_distribution(gen);
     *sample = x / (1 + std::abs(x)); // *sample in range [-1, 1] using sigmoid function
+}
+
+void Render::Add_Control_Point(){
+
+	float x, y;
+	Normal_Distribution(&x);
+	Normal_Distribution(&y);
+
+	lcl_control_points.emplace_back(x);
+    lcl_control_points.emplace_back(y);
+    lcl_control_points.emplace_back(0.0f);
+}
+
+void Render::Remove_Control_Point(){
+    lcl_control_points.pop_back();
+    lcl_control_points.pop_back();
+    lcl_control_points.pop_back();
 }

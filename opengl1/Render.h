@@ -21,7 +21,9 @@ class Render : public Curve{
 public:
 	Render();
 	void Dynamic_Draw();
-
+	void Add_Control_Point();
+	void Remove_Control_Point();
+	
 	bool show_decasteljau;
 	bool show_bspline;
 	bool show_nurbs;
