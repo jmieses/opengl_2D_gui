@@ -161,6 +161,7 @@
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="Render.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="utility.h" />
     <ClInclude Include="VertexArray.h" />
@@ -186,8 +188,16 @@
     <ClInclude Include="VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bspline.fs" />
+    <None Include="bspline.vs" />
+    <None Include="control_points.fs" />
+    <None Include="control_points.vs" />
+    <None Include="decasteljau.fs" />
+    <None Include="decasteljau.vs" />
     <None Include="fragment_shader.fs" />
     <None Include="fragment_shader_2.fs" />
+    <None Include="nurbs.fs" />
+    <None Include="nurbs.vs" />
     <None Include="vertex_shader.vs" />
     <None Include="vertex_shader_2.vs" />
   </ItemGroup>

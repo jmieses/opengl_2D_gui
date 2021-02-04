@@ -48,26 +48,26 @@ std::vector<float> vertices_2 { // place holder vector to initialize OpenGL pipe
 /************************************************************************************************************************************/
 /* Local function definitions                                                                                                       */
 /************************************************************************************************************************************/
-void Normal_Distribution(float*);
-void Update_Vertices(void);
+// void Normal_Distribution(float*);
+// void Update_Vertices(void);
 void Draw(int, VertexArray&, VertexBuffer&);
 
-void Update_Vertices(void) {
+// void Update_Vertices(void) {
 
-    double current_time = glfwGetTime();
-    static double old_time = current_time;
-    static constexpr float TIME_LAPSE = 5.0;
+//     double current_time = glfwGetTime();
+//     static double old_time = current_time;
+//     static constexpr float TIME_LAPSE = 5.0;
   
-    if (current_time != 0.0 && (current_time - old_time) > TIME_LAPSE) {
+//     if (current_time != 0.0 && (current_time - old_time) > TIME_LAPSE) {
 
-        for (int i = 0; i < vertices.size(); i++) {
-            float sample;
-            Normal_Distribution(&sample);
-            vertices.at(i) = sample;
-        }
-        old_time = current_time;
-    }
-}
+//         for (int i = 0; i < vertices.size(); i++) {
+//             float sample;
+//             Normal_Distribution(&sample);
+//             vertices.at(i) = sample;
+//         }
+//         old_time = current_time;
+//     }
+// }
 
 void Draw(int shaderProgram, VertexArray& va, VertexBuffer& vb) {
     // render
@@ -87,7 +87,7 @@ void Draw(int shaderProgram, VertexArray& va, VertexBuffer& vb) {
     /*No use of glDrawElements here since we're only drawing points and do not care about order of point drawing. Not use of index buffer. */
     //glDrawElements(GL_POINTS, 6, GL_UNSIGNED_INT, 0);
     
-    Update_Vertices();
+    //Update_Vertices();
     vb.setData(&vertices.front(), vertices.size() * sizeof(float));
 }
 
@@ -101,26 +101,26 @@ void Dynamic_Draw(const std::vector<float>& points, const VertexArray& va, const
     glDrawArrays(GL_POINTS, 0, points.size() / 3);
 
     if(global_update_control_points){
-        Update_Vertices();
+        //Update_Vertices();
     }
     
 }
 
-void Normal_Distribution(float * sample) {
+// void Normal_Distribution(float * sample) {
 
-    static std::random_device rd;
-    static std::mt19937 gen(rd());  // Mersenne twister PRNG, initialized with seed from previous random device instance
-    static std::default_random_engine generator;
-    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+//     static std::random_device rd;
+//     static std::mt19937 gen(rd());  // Mersenne twister PRNG, initialized with seed from previous random device instance
+//     static std::default_random_engine generator;
+//     static std::uniform_real_distribution<double> distribution(0.0, 1.0);
 
-    static const float mean = distribution(generator);
-    static const float std_dev = distribution(generator);
+//     static const float mean = distribution(generator);
+//     static const float std_dev = distribution(generator);
                                             
-    static std::normal_distribution<float> normal_distribution(mean, std_dev);  // instance of class std::normal_distribution with specific mean and stddev
+//     static std::normal_distribution<float> normal_distribution(mean, std_dev);  // instance of class std::normal_distribution with specific mean and stddev
 
-    float x = normal_distribution(gen);
-    *sample = x / (1 + std::abs(x)); // *sample in range [-1, 1] using sigmoid function
-}
+//     float x = normal_distribution(gen);
+//     *sample = x / (1 + std::abs(x)); // *sample in range [-1, 1] using sigmoid function
+// }
 
 void deAllocateResources() {
 

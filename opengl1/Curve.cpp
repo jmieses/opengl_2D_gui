@@ -1,5 +1,4 @@
 #include "Curve.h"
-#include <numeric>
 
 static const float m_res = 0.001f;
 

@@ -60,6 +60,9 @@
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utility.h">
@@ -110,11 +113,22 @@
     <ClInclude Include="imstb_rectpack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.vs" />
     <None Include="fragment_shader.fs" />
     <None Include="vertex_shader_2.vs" />
     <None Include="fragment_shader_2.fs" />
+    <None Include="decasteljau.fs" />
+    <None Include="decasteljau.vs" />
+    <None Include="nurbs.fs" />
+    <None Include="nurbs.vs" />
+    <None Include="bspline.fs" />
+    <None Include="bspline.vs" />
+    <None Include="control_points.fs" />
+    <None Include="control_points.vs" />
   </ItemGroup>
 </Project>

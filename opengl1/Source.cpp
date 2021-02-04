@@ -241,6 +241,7 @@
 #include "Error_Handling.h"
 #include "Shader.h"
 #include "Curve.h"
+#include "Render.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -288,25 +289,7 @@ int main()
     glDebugMessageCallback(MessageCallback, 0);
     std::cout << glGetString(GL_VERSION) << '\n';
 
-    Shader shader("vertex_shader.vs", "fragment_shader.fs");
-    Shader shader_2("vertex_shader_2.vs", "fragment_shader_2.fs");
-
-    VertexArray dynamic_vertex_array;
-    VertexBuffer dynamic_vertex_buffer(vertices, false);
-    VertexBufferLayout dynamic_layout;
-    dynamic_layout.Push<float>(3);
-    dynamic_vertex_array.AddBuffer(dynamic_vertex_buffer, dynamic_layout);
-    glEnableVertexAttribArray(0);
-
-    VertexArray dynamic_vertex_array_2;
-    VertexBuffer dynamic_vertex_buffer_2(vertices_2, false);
-    VertexBufferLayout dynamic_layout_2;
-    dynamic_layout_2.Push<float>(3);
-    dynamic_vertex_array_2.AddBuffer(dynamic_vertex_buffer_2, dynamic_layout_2);
-    glEnableVertexAttribArray(0);
-
-    Curve curve;
-
+    Render render;
     // imgui
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -336,18 +319,16 @@ int main()
         processInput(window);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
-        glPointSize(2);
-        Dynamic_Draw(curve.NURBS(vertices), dynamic_vertex_array_2, dynamic_vertex_buffer_2, shader_2);
-        glPointSize(5);
-        Dynamic_Draw(vertices, dynamic_vertex_array, dynamic_vertex_buffer, shader);
 
+        render.Dynamic_Draw();
 
-        auto& wts = curve.Get_Weights();
+        auto& wts = render.Get_Weights();
+
         // render your GUI
         
 
         ImGui::Begin("Application Controls");
-        ImGui::Checkbox("Allow Random Control Points", &global_update_control_points);
+        ImGui::Checkbox("Allow Random Control Points", &render.update_control_points);
         if (ImGui::Button("Add Control Point")){
             vertices.emplace_back(.5f);
             vertices.emplace_back(.5f);
@@ -364,12 +345,25 @@ int main()
             ImGui::ColorEdit3("clear color", (float*)&clear_color);
         }
 
-        if (ImGui::CollapsingHeader("Control Point Weights")){
-            for(int i = 0; i < wts.size(); i++){
-                std::string label = "weight " + std::to_string(i);
-                ImGui::DragFloat(&label.front(), &wts[i], 0.05f, 0.0f, 100.0f);
-            }
+        ImGui::Checkbox("Show deCasteljau", &render.show_decasteljau);
+        ImGui::Checkbox("Show Bspline", &render.show_bspline);
+        ImGui::Checkbox("Show NURBS", &render.show_nurbs);
+
+        if (render.show_nurbs){
+            if (ImGui::CollapsingHeader("Control Point Weights")){
+                for(int i = 0; i < wts.size(); i++){
+                    std::string label = "weight " + std::to_string(i);
+                    ImGui::DragFloat(&label.front(), &wts[i], 0.05f, 0.0f, 100.0f);
+                }
+
+                if (ImGui::Button("Reset Weights")){
+                    for(int i = 0; i < wts.size(); i++){
+                        wts[i] = 1.0f;
+                    }
+                }
+            }   
         }
+
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
         // Render dear imgui into screen

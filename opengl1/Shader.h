@@ -5,8 +5,8 @@
 
 class Shader {
 public:
-	Shader(const char* vertex_shader_path, const char* fragment_shader_path);
-
+	Shader() = default;
+	void Set_Shader(const char* vertex_shader_path, const char* fragment_shader_path);
 	void Use() const;
 
 private:

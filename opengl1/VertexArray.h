@@ -15,5 +15,6 @@ public:
 	void AddOneBuffer(const VertexBuffer& vb, unsigned int, unsigned int);
 	void const Bind() const;
 	void const UnBind() const;
+	inline unsigned int getID() { return m_RendererID; }
 };
 
