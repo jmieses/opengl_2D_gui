@@ -28,5 +28,11 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 
 ## Usage
 
+## TODO
+
+* Unit testing.
+* Resolve low degree calculation error
+* GUI abstraction from main
+
 
 ### Any optional sections
