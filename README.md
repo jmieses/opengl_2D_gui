@@ -30,10 +30,10 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 ## TODO
 
 * Unit testing.
-* Resolve low degree calculation error
-* GUI abstraction from main
-* Static analysis
-* Source code sanityze
-
+* Resolve low degree calculation error.
+* GUI abstraction from main.
+* Static analysis.
+* Source code sanityze.
+* Ensure RAII for classes.
 
 ### Any optional sections
