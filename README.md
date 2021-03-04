@@ -18,10 +18,7 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 
 ## Install
 
-This module depends upon a knowledge of [Markdown]().
-
-```
-```
+Install OpenGL (above 3.3). This tutorial shows the steps to download and install: [learnopengl.com](https://learnopengl.com)
 
 ### Any optional sections
 
