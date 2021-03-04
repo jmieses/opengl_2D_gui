@@ -1,4 +1,4 @@
-# Title
+# OpengGL 2D GUI
 
 ![banner]()
 
@@ -7,23 +7,16 @@
 [![license](https://img.shields.io/github/license/:user/:repo.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-This is an example file with maximal choices selected.
-
-This is a long description.
+Small project for rendering 2D curves using OpenGL. In addition, the project has a GUI to control various aspects of the curves as well as the window background drawing. Bezier, Bspline and NURBS curves are displayed in the program and can be selected through the GUI. 
 
 ## Table of Contents
 
-- [Security](#security)
 - [Background](#background)
 - [Install](#install)
 - [Usage](#usage)
-- [API](#api)
-- [Contributing](#contributing)
 - [License](#license)
 
-## Security
 
-### Any optional sections
 
 ## Background
 
@@ -47,21 +40,6 @@ Note: The `license` badge image link at the top of this file should be updated w
 
 ### Any optional sections
 
-## API
-
-### Any optional sections
-
-## More optional sections
-
-## Contributing
-
-See [the contributing file](CONTRIBUTING.md)!
-
-PRs accepted.
-
-Small note: If editing the Readme, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
-
-### Any optional sections
 
 ## License
 
