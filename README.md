@@ -28,14 +28,5 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 
 ## Usage
 
-```
-```
-
-Note: The `license` badge image link at the top of this file should be updated with the correct `:user` and `:repo`.
 
 ### Any optional sections
-
-
-## License
-
-[MIT © Richard McRichface.](../LICENSE)
