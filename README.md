@@ -18,7 +18,11 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 
 ## Install
 
-Install OpenGL (above 3.3). This tutorial shows the steps to download and install: [learnopengl.com](https://learnopengl.com)
+1. Clone the repo
+   ```sh
+   git clone https://github.com/jmieses/opengl_2D_gui.git
+   ```
+2. Run solution with visual studio.
 
 ### Any optional sections
 
