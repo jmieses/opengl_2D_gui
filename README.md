@@ -8,7 +8,6 @@ Small project for rendering 2D curves using OpenGL. In addition, the project has
 - [Background](#background)
 - [Install](#install)
 - [Usage](#usage)
-- [License](#license)
 
 
 
